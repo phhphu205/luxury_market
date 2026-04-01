@@ -1,0 +1,23 @@
+services:
+  mongo_db:
+    image: mongo:latest
+    restart: always
+    env_file:
+      - ./processor/ad.env
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  ai_api:
+    build:
+      context: ./processor
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./processor/ad.env
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongodb_data:
