@@ -11,7 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/ai_assistant.css">
 </head>
 <body>
 
@@ -63,10 +64,10 @@
   
   <ul class="nav-links">
     <li><a href="index.html" style="color:var(--accent)">Trang chủ</a></li>
-    <li><a href="categories.html">Danh mục</a></li>
-    <li><a href="products.html">Sản phẩm</a></li>
-    <li><a href="flash-sale.html">Flash Sale 🔥</a></li>
-    <li><a href="reviews.html">Đánh giá</a></li>
+    <li><a href="html/categories.html">Danh mục</a></li>
+    <li><a href="html/products.html">Sản phẩm</a></li>
+    <li><a href="html/flash-sale.html">Flash Sale 🔥</a></li>
+    <li><a href="html/reviews.html">Đánh giá</a></li>
   </ul>
 
   <div class="nav-actions">
@@ -80,7 +81,7 @@
     </button>
     <span class="theme-toggle" onclick="toggleTheme()" title="Dark mode" aria-label="Chuyển chế độ tối">🌙</span>
     <div class="user-avatar" onclick="showProfile()">PHU</div>
-    <button class="login-btn" onclick="window.location.href='auth.html'">Đăng nhập</button>
+    <button class="login-btn" onclick="window.location.href='html/auth.html'">Đăng nhập</button>
     <span id="userGreeting" class="user-greeting"></span>
     <div class="hamburger" onclick="toggleMenu()" aria-label="Mở menu">
       <span></span><span></span><span></span>
@@ -99,8 +100,8 @@
     <h1>Mua sắm<br><em>đẳng cấp</em><br>mọi lúc</h1>
     <p>Khám phá hàng ngàn sản phẩm chính hãng với giá tốt nhất. Giao hàng nhanh, đổi trả dễ dàng, thanh toán an toàn.</p>
     <div class="hero-cta">
-      <a href="products.html" class="btn-primary">Mua sắm ngay →</a>
-      <a href="flash-sale.html" class="btn-secondary">Flash Sale 🔥</a>
+      <a href="html/products.html" class="btn-primary">Mua sắm ngay →</a>
+      <a href="html/flash-sale.html" class="btn-secondary">Flash Sale 🔥</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">50K+</span><span class="stat-label">Sản phẩm</span></div>
@@ -132,7 +133,7 @@
         <div class="slide-content">
           <div class="slide-tag">Flash Sale cuối tuần</div>
           <div class="slide-title">Giảm đến<br><strong style="font-size:1.4em;color:var(--accent)">70%</strong><br>Thời trang cao cấp</div>
-          <button class="slide-cta" onclick="window.location.href='flash-sale.html'">Xem ngay ↓</button>
+          <button class="slide-cta" onclick="window.location.href='html/flash-sale.html'">Xem ngay ↓</button>
         </div>
         <div style="position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:min(15vw,120px);opacity:0.3">👗</div>
       </div>
@@ -140,7 +141,7 @@
         <div class="slide-content">
           <div class="slide-tag">Bộ sưu tập mới</div>
           <div class="slide-title">Đồng hồ<br><em>Luxury</em><br>Sang trọng vượt thời gian</div>
-          <button class="slide-cta" onclick="window.location.href='categories.html'">Khám phá →</button>
+          <button class="slide-cta" onclick="window.location.href='html/categories.html'">Khám phá →</button>
         </div>
         <div style="position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:min(15vw,120px);opacity:0.3">⌚</div>
       </div>
@@ -148,7 +149,7 @@
         <div class="slide-content">
           <div class="slide-tag">Ưu đãi đặc biệt</div>
           <div class="slide-title">Miễn phí<br>vận chuyển<br><span style="color:var(--accent2)">toàn quốc</span></div>
-          <button class="slide-cta" onclick="window.location.href='products.html'">Mua ngay</button>
+          <button class="slide-cta" onclick="window.location.href='html/products.html'">Mua ngay</button>
         </div>
         <div style="position:absolute;right:40px;top:50%;transform:translateY(-50%);font-size:min(15vw,120px);opacity:0.3">🚀</div>
       </div>
@@ -171,7 +172,7 @@
   </div>
   <div class="categories-grid reveal" id="categoriesGrid"></div>
   <div class="reveal" style="text-align:center;margin-top:32px">
-    <a href="categories.html" class="btn-secondary" style="display:inline-flex">Xem tất cả danh mục →</a>
+    <a href="html/categories.html" class="btn-secondary" style="display:inline-flex">Xem tất cả danh mục →</a>
   </div>
 </section>
 
@@ -184,7 +185,7 @@
   <div class="filter-bar reveal" id="filterBar"></div>
   <div class="products-grid" id="productsGrid"></div>
   <div class="reveal" style="text-align:center;margin-top:32px">
-    <a href="products.html" class="btn-primary" style="display:inline-flex">Xem tất cả sản phẩm →</a>
+    <a href="html/products.html" class="btn-primary" style="display:inline-flex">Xem tất cả sản phẩm →</a>
   </div>
 </section>
 
@@ -206,7 +207,7 @@
   </div>
   <div class="flash-grid reveal" id="flashGrid"></div>
   <div class="reveal" style="text-align:center;margin-top:32px">
-    <a href="flash-sale.html" class="btn-secondary" style="display:inline-flex;border-color:rgba(255,255,255,0.3);color:white">Xem tất cả Flash Sale ⚡</a>
+    <a href="html/flash-sale.html" class="btn-secondary" style="display:inline-flex;border-color:rgba(255,255,255,0.3);color:white">Xem tất cả Flash Sale ⚡</a>
   </div>
 </section>
 
@@ -218,7 +219,7 @@
   </div>
   <div class="reviews-grid" id="reviewsGrid"></div>
   <div class="reveal" style="text-align:center;margin-top:32px">
-    <a href="reviews.html" class="btn-secondary" style="display:inline-flex">Xem tất cả đánh giá →</a>
+    <a href="html/reviews.html" class="btn-secondary" style="display:inline-flex">Xem tất cả đánh giá →</a>
   </div>
 </section>
 
@@ -242,11 +243,11 @@
     <div>
       <div class="footer-heading">Mua sắm</div>
       <ul class="footer-links">
-        <li><a href="products.html">Sản phẩm mới</a></li>
-        <li><a href="flash-sale.html">Flash Sale</a></li>
-        <li><a href="categories.html">Danh mục</a></li>
-        <li><a href="products.html">Sản phẩm nổi bật</a></li>
-        <li><a href="flash-sale.html">Ưu đãi hôm nay</a></li>
+        <li><a href="html/products.html">Sản phẩm mới</a></li>
+        <li><a href="html/flash-sale.html">Flash Sale</a></li>
+        <li><a href="html/categories.html">Danh mục</a></li>
+        <li><a href="html/products.html">Sản phẩm nổi bật</a></li>
+        <li><a href="html/flash-sale.html">Ưu đãi hôm nay</a></li>
       </ul>
     </div>
     <div>
@@ -302,7 +303,25 @@
   </div>
 </div>
 
-<script src="../js/script.js" defer></script>
-<script src="../js/ai_assistant.js" defer></script>
+<!-- AI ASSISTANT WIDGET -->
+<div id="ai-chat-widget">
+    <button id="ai-chat-btn" title="Chat với AI Trợ lý">🤖</button>
+    <div id="ai-chat-box" class="hidden">
+        <div class="chat-header">
+            <h3>✨ Trợ lý AI Luxury</h3>
+            <button id="ai-close-btn">&times;</button>
+        </div>
+        <div class="chat-body" id="ai-chat-body">
+            <div class="message ai">Xin chào! Tôi là trợ lý AI của Luxury Market. Bạn cần tư vấn về sản phẩm nào hôm nay?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="ai-chat-input" placeholder="Nhập câu hỏi của bạn..." autocomplete="off" />
+            <button id="ai-send-btn">Gửi</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="js/script.js"></script>
+<script src="js/ai_assistant.js" defer></script>
 </body>
 </html>

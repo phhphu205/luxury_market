@@ -501,10 +501,10 @@
 
   <!-- Header -->
   <div class="left-header">
-    <a href="index.html" class="logo-link">
+    <a href="../index.html" class="logo-link">
       <span class="logo-text">LUXURY<span class="logo-dot"></span>MARKET</span>
     </a>
-    <a href="index.html" class="back-link">← Quay về trang chủ</a>
+    <a href="../index.html" class="back-link">← Quay về trang chủ</a>
   </div>
 
   <!-- Body -->
@@ -812,7 +812,7 @@ async function handleSubmit(event) {
         if (result.status === "success") {
             if (mode === 'login') {
                 localStorage.setItem("luxury_user", JSON.stringify(result.user_info));
-                setTimeout(() => window.location.href = "index.html", 1000);
+                setTimeout(() => window.location.href = "../index.html", 1000);
             } else {
                 switchTab('login');
             }
@@ -852,7 +852,7 @@ async function handleSubmit(event) {
         const u = JSON.parse(user);
         if (u && u.username) {
           showToast(`Bạn đã đăng nhập với: ${u.username}. Đang chuyển trang...`, 'success');
-          setTimeout(() => window.location.href = 'index.html', 1200);
+          setTimeout(() => window.location.href = '../index.html', 1200);
         }
       } catch(e) {}
     }

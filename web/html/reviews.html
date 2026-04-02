@@ -12,6 +12,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/ai_assistant.css">
+  
 </head>
 <body>
 
@@ -59,9 +61,8 @@
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
-  <a href="index.html" class="logo">LUXURY<span class="logo-dot"></span>MARKET</a>
   <ul class="nav-links">
-    <li><a href="index.html">Trang chủ</a></li>
+    <li><a href="../index.html">Trang chủ</a></li>
     <li><a href="categories.html">Danh mục</a></li>
     <li><a href="products.html">Sản phẩm</a></li>
     <li><a href="flash-sale.html">Flash Sale 🔥</a></li>
@@ -237,6 +238,25 @@
   </div>
 </div>
 
-<script src="../js/script.js" defer></script>
+<!-- AI ASSISTANT WIDGET -->
+<div id="ai-chat-widget">
+    <button id="ai-chat-btn" title="Chat với AI Trợ lý">🤖</button>
+    <div id="ai-chat-box" class="hidden">
+        <div class="chat-header">
+            <h3>✨ Trợ lý AI Luxury</h3>
+            <button id="ai-close-btn">&times;</button>
+        </div>
+        <div class="chat-body" id="ai-chat-body">
+            <div class="message ai">Xin chào! Tôi là trợ lý AI của Luxury Market. Bạn cần tư vấn về sản phẩm nào hôm nay?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="ai-chat-input" placeholder="Nhập câu hỏi của bạn..." autocomplete="off" />
+            <button id="ai-send-btn">Gửi</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="../js/script.js"></script>
+<script src="../js/ai_assistant.js" defer></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 import google.generativeai as ai
 from pydantic import BaseModel
-ai.configure(api_key="AIzaSyCNwxuiyZL-rBP3g_Yl-1owcbQhv4abk6E")
+ai.configure(api_key="AIzaSyA4WA-wcUXe27BJXO4AJ-Ek7ISkZuQhChw")
 model = ai.GenerativeModel("models/gemini-2.5-flash")
 
 class ChatInput(BaseModel):
