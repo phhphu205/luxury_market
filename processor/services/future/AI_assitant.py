@@ -1,6 +1,15 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 import google.generativeai as ai
 from pydantic import BaseModel
-ai.configure(api_key="AIzaSyA4WA-wcUXe27BJXO4AJ-Ek7ISkZuQhChw")
+
+# Load file ad.env từ thư mục gốc của processor
+env_path = Path(__file__).resolve().parent.parent.parent / "ad.env"
+load_dotenv(dotenv_path=env_path)
+
+# Lấy API Key từ biến môi trường
+ai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = ai.GenerativeModel("models/gemini-2.5-flash")
 
 class ChatInput(BaseModel):
