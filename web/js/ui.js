@@ -1,7 +1,17 @@
 import { categories, products, flashSaleProducts, reviews } from './data.js';
 
 export let currentSlide = 0;
-export let isDark = false;
+export let isDark = localStorage.getItem('luxury_theme') === 'dark';
+
+// Áp dụng ngay giao diện tối nếu trước đó người dùng đã chọn
+if (isDark) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+});
 export let slideInterval;
 export let endTime;
 
@@ -142,7 +152,7 @@ export function updateCountdown() {
   document.getElementById('countM').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
   document.getElementById('countS').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
 }
-export function toggleTheme() { isDark = !isDark; document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light'); const btn = document.querySelector('.theme-toggle'); if(btn) btn.textContent = isDark ? '☀️' : '🌙'; }
+export function toggleTheme() { isDark = !isDark; document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light'); localStorage.setItem('luxury_theme', isDark ? 'dark' : 'light'); const btn = document.querySelector('.theme-toggle'); if(btn) btn.textContent = isDark ? '☀️' : '🌙'; }
 export function setupObserver() {
   const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, {threshold:0.1, rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
