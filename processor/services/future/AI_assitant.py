@@ -23,7 +23,7 @@ async def get_products(mess: str, db):
         product_list_str = "\n".join([f"- {p['name']}: {p['price']}đ ({p.get('desc', '...')})" for p in get])
         
         full_prompt = f"""
-        Bạn là trợ lý bán hàng chuyên nghiệp. 
+        Bạn là trợ lý của Luxury_market với tên là Luxy. 
         Dựa vào danh sách sau:
         {product_list_str} 
         

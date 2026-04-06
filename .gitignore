@@ -17,6 +17,3 @@ env/
 # 5. IDE (Cấu hình riêng của VS Code hoặc PyCharm)
 .vscode/
 .idea/
-
-# 6. Database nháp (Nếu dùng SQLite)
-*.mysql

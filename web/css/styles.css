@@ -32,12 +32,16 @@
   box-sizing: border-box;
 }
 
+input, button, select, textarea {
+  font-family: inherit;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
@@ -64,7 +68,7 @@ body {
 [data-theme="dark"] .navbar{background:rgba(15,15,15,0.9)}
 .navbar.scrolled{height:60px;box-shadow:var(--shadow)}
 .logo {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
   letter-spacing: -0.5px;
   color: var(--text);
@@ -323,7 +327,7 @@ body {
 }
 
 .hero h1 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(3rem, 6vw, 5.5rem);
   line-height: 1.05;
   letter-spacing: -2px;
@@ -420,7 +424,7 @@ body {
 }
 
 .stat-num {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem;
   color: var(--text);
   letter-spacing: -1px;
@@ -517,7 +521,7 @@ body {
 }
 
 .section-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   letter-spacing: -1px;
   color: var(--text);
@@ -754,7 +758,7 @@ body {
 }
 
 .price-current {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
   color: var(--text);
   letter-spacing: -0.5px;
@@ -832,7 +836,7 @@ body {
 }
 
 .flash-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   letter-spacing: -1px;
 }
@@ -860,7 +864,7 @@ body {
 }
 
 .count-num {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   line-height: 1;
   letter-spacing: -2px;
@@ -877,7 +881,7 @@ body {
 }
 
 .count-sep {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem;
   color: var(--accent);
   font-weight: bold;
@@ -951,7 +955,7 @@ body {
 }
 
 .flash-price-cur {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
   color: var(--accent);
 }
@@ -986,7 +990,7 @@ body {
 
 .review-card::before {
   content: '"';
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 6rem;
   color: var(--accent);
   opacity: 0.1;
@@ -1061,7 +1065,7 @@ footer {
 }
 
 .footer-brand {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   margin-bottom: 16px;
   letter-spacing: -0.5px;
@@ -1286,7 +1290,7 @@ footer {
 }
 
 .cart-header h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
 }
 
@@ -1347,7 +1351,7 @@ footer {
 }
 
 .cart-item-price {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   color: var(--accent);
   font-size: 1.1rem;
 }
@@ -1430,7 +1434,7 @@ footer {
 }
 
 .cart-total span:last-child {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
   color: var(--text);
 }
@@ -1552,7 +1556,7 @@ footer {
 }
 
 .modal-name {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem;
   letter-spacing: -1px;
   margin-bottom: 16px;
@@ -1581,7 +1585,7 @@ footer {
 }
 
 .modal-price {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2.2rem;
   color: var(--text);
 }
@@ -1720,7 +1724,7 @@ footer {
   border: none;
   background: transparent;
   color: var(--text);
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   outline: none;
 }
 
@@ -1791,7 +1795,7 @@ footer {
 }
 
 .slide-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   margin-bottom: 16px;
   line-height: 1.1;
@@ -2079,6 +2083,7 @@ body.dark .logout-btn:hover {
 
 /* Tiêu đề */
 .profile-box h2 {
+    font-family: 'Playfair Display', serif;
     font-size: 26px;
     margin-bottom: 25px;
     color: #1d1d1f;
@@ -2151,7 +2156,7 @@ body.auth-page {
   --radius:    14px;
   --shadow:    0 24px 64px rgba(0,0,0,0.18);
 
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   min-height: 100vh;
   display: flex;
   background: var(--dark);
@@ -2216,7 +2221,7 @@ body.auth-page {
 /* ===== LEFT: HEADER ===== */
 .auth-page .left-header { position:relative; z-index:2; }
 .auth-page .logo-link { display: inline-flex; align-items:center; gap:10px; text-decoration:none; }
-.auth-page .logo-text { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--text-d); letter-spacing: -0.5px; }
+.auth-page .logo-text { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--text-d); letter-spacing: -0.5px; }
 .auth-page .logo-dot { width: 9px; height: 9px; background: var(--accent); border-radius: 50%; display:inline-block; animation: pulse 2s ease-in-out infinite; }
 .auth-page .back-link { display:inline-flex; align-items:center; gap:6px; margin-top:20px; color:var(--muted-d); font-size:0.82rem; font-weight:500; text-decoration:none; transition:color .2s, gap .2s; }
 .auth-page .back-link:hover { color:var(--text-d); gap:10px; }
@@ -2224,7 +2229,7 @@ body.auth-page {
 /* ===== LEFT: HERO TEXT ===== */
 .auth-page .left-body { position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:center; padding: 60px 0; }
 .auth-page .left-eyebrow { font-size:0.72rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
-.auth-page .left-headline { font-family:'DM Serif Display', serif; font-size: clamp(2.4rem, 3.5vw, 3.4rem); line-height: 1.08; letter-spacing: -1.5px; color: var(--text-d); margin-bottom: 20px; }
+.auth-page .left-headline { font-family:'Playfair Display', serif; font-size: clamp(2.4rem, 3.5vw, 3.4rem); line-height: 1.08; letter-spacing: -1.5px; color: var(--text-d); margin-bottom: 20px; }
 .auth-page .left-headline em { color:var(--accent); font-style:italic; }
 .auth-page .left-desc { font-size: 0.95rem; color: var(--muted-d); line-height: 1.75; max-width: 360px; margin-bottom: 40px; }
 
@@ -2279,7 +2284,7 @@ body.auth-page {
 }
 .auth-page .tab-btn {
   flex:1; padding:11px 0; border:none; background:transparent;
-  font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600;
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:0.9rem; font-weight:600;
   color:var(--muted-l); cursor:pointer; border-radius:10px;
   transition:color .25s; position:relative; z-index:1;
 }
@@ -2294,7 +2299,7 @@ body.auth-page {
 
 /* ===== FORM GREETING ===== */
 .auth-page .form-greeting { margin-bottom:28px; }
-.auth-page .form-greeting h1 { font-family:'DM Serif Display',serif; font-size:1.9rem; letter-spacing:-0.8px; color:var(--text-l); margin-bottom:6px; }
+.auth-page .form-greeting h1 { font-family:'Playfair Display',serif; font-size:1.9rem; letter-spacing:-0.8px; color:var(--text-l); margin-bottom:6px; }
 .auth-page .form-greeting p { font-size:0.88rem; color:var(--muted-l); line-height:1.6; }
 
 /* ===== INPUT FIELDS ===== */
@@ -2304,7 +2309,7 @@ body.auth-page {
 .auth-page .field input {
   width:100%; padding:14px 16px; border:1.5px solid var(--border-l);
   border-radius:var(--radius); background:#fff;
-  font-family:'DM Sans',sans-serif; font-size:0.92rem; color:var(--text-l);
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:0.92rem; color:var(--text-l);
   outline:none; transition:border-color .2s, box-shadow .2s, background .2s;
 }
 .auth-page .field input:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(230,57,70,0.1); }
@@ -2339,7 +2344,7 @@ body.auth-page {
 /* ===== SUBMIT BTN ===== */
 .auth-page .submit-btn {
   width:100%; padding:16px; border:none; border-radius:var(--radius);
-  background:var(--accent); color:#fff; font-family:'DM Sans',sans-serif;
+  background:var(--accent); color:#fff; font-family:'Plus Jakarta Sans',sans-serif;
   font-size:0.95rem; font-weight:700; cursor:pointer; letter-spacing:0.3px;
   position:relative; overflow:hidden; transition:transform .2s, box-shadow .2s;
 }
@@ -2364,7 +2369,7 @@ body.auth-page {
 .auth-page .social-btn {
   flex:1; padding:13px 0; border:1.5px solid var(--border-l); border-radius:var(--radius);
   background:#fff; display:flex; align-items:center; justify-content:center; gap:8px;
-  font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:600; color:var(--text-l);
+  font-family:'Plus Jakarta Sans',sans-serif; font-size:0.85rem; font-weight:600; color:var(--text-l);
   cursor:pointer; transition:border-color .2s, box-shadow .2s, transform .2s;
 }
 .auth-page .social-btn:hover { border-color:var(--text-l); box-shadow:0 4px 16px rgba(0,0,0,0.08); transform:translateY(-1px); }

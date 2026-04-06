@@ -8,7 +8,6 @@ from services.future.login import LoginForm, handle_login
 from services.future.AI_assitant import ChatInput, get_products
 from services.future.profile import handle_upload_avatar
 from services.repositories.Product_db import db
-
 processor = FastAPI()
 
 processor.add_middleware(
@@ -19,8 +18,11 @@ processor.add_middleware(
 )
 
 # Cấu hình để serve các file ảnh được upload
-os.makedirs("uploads", exist_ok=True)
-processor.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+processor.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 @processor.post("/api/chat_ai")
 async def chat_endpoint(data: ChatInput):

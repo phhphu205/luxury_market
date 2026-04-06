@@ -15,7 +15,7 @@ export function updateUserUI() {
     if (userAvatar) {
       userAvatar.style.display = "flex";
       if (currentUser.avatar) {
-        userAvatar.innerHTML = `<img src="${currentUser.avatar}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+        userAvatar.innerHTML = `<img src="${currentUser.avatar}" alt="Avatar" class="loaded" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.username)}&background=random';" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
       } else {
         userAvatar.innerHTML = currentUser.username.charAt(0).toUpperCase();
       }
@@ -36,21 +36,50 @@ export function logout() { currentUser = null; localStorage.removeItem("luxury_u
 // ===== QUẢN LÝ HỒ SƠ NGƯỜI DÙNG (PROFILE MODAL) =============
 // ============================================================
 export function openProfileModal() { 
-  if(currentUser) {
+  if (currentUser) {
+    // 1. Hiển thị tên và Modal ngay lập tức khi bấm nút "Profile"
     document.getElementById("profileUsername").innerText = currentUser.username; 
-    const avatarPreview = document.getElementById("profileAvatarPreview");
-    if (avatarPreview) avatarPreview.src = currentUser.avatar || "https://ui-avatars.com/api/?name=" + currentUser.username + "&background=random";
-    const avatarInput = document.getElementById("avatarFileInput");
-    if (avatarInput) avatarInput.value = ""; // Reset lại input
     document.getElementById("profileModal").style.display = "flex"; 
+
+    const avatarPreview = document.getElementById("profileAvatarPreview");
+    const avatarInput = document.getElementById("avatarFileInput");
+    
+    // 2. Gán sự kiện lỗi TRƯỚC KHI gán src để đảm bảo luôn bắt được lỗi 404/caching
+    avatarPreview.onerror = function() { 
+      this.onerror = null; 
+      this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.username)}&background=random`; 
+    };
+
+    // 3. Hiển thị ảnh hiện tại của người dùng (nếu có), nếu không thì hiện avatar mặc định
+    avatarPreview.src = currentUser.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser.username)}&background=random`;
+
+    // Reset giá trị file input để lần sau chọn lại cùng 1 file vẫn kích hoạt sự kiện xem trước
+    avatarInput.value = "";
+
+    // 4. Thiết lập sự kiện khi người dùng CHỌN ẢNH MỚI
+    avatarInput.onchange = function() {
+      const file = avatarInput.files[0];
+      if (file) {
+        // Tạo link tạm cho ảnh mới chọn
+        const url_moi = URL.createObjectURL(file);
+        
+        // Hiển thị đè ảnh mới lên khung hình
+        avatarPreview.src = url_moi;
+        
+        console.log("Đã xem trước ảnh mới!");
+      }
+    };
   }
 }
+
 export function closeProfileModal() { document.getElementById("profileModal").style.display = "none"; }
 export function showProfile() { if (!currentUser) { window.showToast("Vui lòng đăng nhập để xem hồ sơ",'error'); return; } openProfileModal(); }
 
 // Upload Avatar mới lên server
+
 export async function saveProfile() {
   const fileInput = document.getElementById("avatarFileInput");
+
   if (!fileInput || !currentUser) return;
   const file = fileInput.files[0];
   
@@ -281,21 +310,6 @@ if (typeof window !== 'undefined') {
 // INIT Khởi tạo các trạng thái cho trang auth.html
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
-    // Xử lý Preview Avatar khi người dùng chọn ảnh từ thiết bị
-    document.addEventListener('change', (e) => {
-      if (e.target && e.target.id === 'avatarFileInput') {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(evt) {
-            const preview = document.getElementById('profileAvatarPreview');
-            if (preview) preview.src = evt.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-    });
-
     updateUserUI();
     if (document.getElementById('authForm')) {
       const user = localStorage.getItem('luxury_user');

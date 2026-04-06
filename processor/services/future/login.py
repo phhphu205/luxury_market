@@ -17,7 +17,8 @@ async def handle_login(data: LoginForm, db):
                 "message": "Đăng nhập thành công!",
                 "user_info": {
                     "username": user["username"],
-                    "fullname": user.get("inputFullname", "")
+                    "fullname": user.get("inputFullname", ""),
+                    "avatar": user.get("avatar", "")
                 }
             }
         return {"status": "error", "message": "Sai tài khoản hoặc mật khẩu!"}

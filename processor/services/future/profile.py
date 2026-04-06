@@ -2,16 +2,18 @@ import os
 import uuid
 from fastapi import UploadFile
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
+
 async def handle_upload_avatar(username: str, file: UploadFile, db):
     try:
         # Tạo thư mục uploads nếu chưa có
-        upload_dir = "uploads"
-        os.makedirs(upload_dir, exist_ok=True)
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
         
         # Tạo tên file ngẫu nhiên để tránh trùng lặp
         ext = file.filename.split(".")[-1]
         filename = f"{username}_{uuid.uuid4().hex[:8]}.{ext}"
-        file_path = os.path.join(upload_dir, filename)
+        file_path = os.path.join(UPLOAD_DIR, filename)
         
         # Lưu file vật lý vào máy chủ
         with open(file_path, "wb") as buffer:
