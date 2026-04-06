@@ -15,6 +15,12 @@ document.addEventListener('keydown', e => {
 document.querySelectorAll("img").forEach(img => img.setAttribute("loading", "lazy"));
 
 function init() {
+  // Yêu cầu đăng nhập khi truy cập trang products.html
+  if (window.location.pathname.includes('products.html') && !Auth.currentUser) {
+    window.location.href = 'auth.html';
+    return;
+  }
+
   if (document.getElementById('categoriesGrid')) UI.renderCategories();
   if (document.getElementById('productsGrid')) UI.renderProducts();
   if (document.getElementById('flashGrid')) UI.renderFlashSale();

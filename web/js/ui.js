@@ -114,6 +114,10 @@ export function renderReviews() {
 }
 
 export function openProduct(id) {
+  if (!window.currentUser) {
+    window.location.href = window.location.pathname.includes('/html/') ? 'auth.html' : 'html/auth.html';
+    return;
+  }
   const p = products.find(x => x.id===id);
   if(!p) return;
   const discount = p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : 0;
@@ -160,7 +164,13 @@ export function setupObserver() {
 export function setupNavScroll() { window.addEventListener('scroll', () => { const nb = document.getElementById('navbar'); if (nb) nb.classList.toggle('scrolled', window.scrollY > 50); }); }
 export function filterByCategory(cat) { localStorage.setItem('luxury_filter', cat); }
 export function openCategory(name) { showToast(`Đang xem: ${name}`, 'success'); }
-export function addWishlist(id) { const p = products.find(x => x.id===id); if(p) showToast(`❤️ Đã thêm "${p.name}" vào danh sách yêu thích!`, 'success'); }
+export function addWishlist(id) { 
+  if (!window.currentUser) {
+    window.location.href = window.location.pathname.includes('/html/') ? 'auth.html' : 'html/auth.html';
+    return;
+  }
+  const p = products.find(x => x.id===id); if(p) showToast(`❤️ Đã thêm "${p.name}" vào danh sách yêu thích!`, 'success'); 
+}
 export function handleSort(v) { showToast(`Sắp xếp theo: ${v}`, 'success'); }
 export function subscribe() { const e = document.getElementById('emailInput')?.value; if(!e) { showToast('Vui lòng nhập email!','error'); return; } showToast(`✅ Đăng ký thành công: ${e}`, 'success'); document.getElementById('emailInput').value = ''; }
 export function toggleMenu() { showToast('📱 Menu mobile đang được phát triển','success'); }

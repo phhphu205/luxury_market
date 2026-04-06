@@ -1,4 +1,4 @@
-// ===== DATA =====
+// ===== DATA ===== 
 export const categories = [
   {icon:'👗',name:'Thời trang',count:'12,500 sản phẩm'},
   {icon:'📱',name:'Điện tử',count:'8,200 sản phẩm'},

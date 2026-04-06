@@ -1,38 +1,9 @@
+// ============================================================
+// ===== QUẢN LÝ PHIÊN ĐĂNG NHẬP (USER SESSION) ===============
+// ============================================================
 export let currentUser = JSON.parse(localStorage.getItem("luxury_user")) || null;
-export let isLoginMode = true;
 
-export function toggleAuthMode() {
-  isLoginMode = !isLoginMode;
-  document.getElementById("authTitle").innerText = isLoginMode ? "Đăng nhập" : "Đăng ký";
-  document.getElementById("switchAuth").innerHTML = isLoginMode
-    ? `Chưa có tài khoản? <span onclick="window.toggleAuthMode()">Đăng ký</span>`
-    : `Đã có tài khoản? <span onclick="window.toggleAuthMode()">Đăng nhập</span>`;
-}
-
-export function handleAuth() {
-  const username = document.getElementById("authUsername")?.value;
-  const password = document.getElementById("authPassword")?.value;
-  if (!username || !password) { alert("Vui lòng nhập đầy đủ thông tin!"); return; }
-  let users = JSON.parse(localStorage.getItem("luxury_users")) || [];
-  if (isLoginMode) {
-    const user = users.find(u => u.username === username && u.password === password);
-    if (!user) { alert("Sai tài khoản hoặc mật khẩu!"); return; }
-    currentUser = user;
-    localStorage.setItem("luxury_user", JSON.stringify(user));
-    alert("Đăng nhập thành công!");
-  } else {
-    if (users.some(u => u.username === username)) { alert("Tên đăng nhập đã tồn tại!"); return; }
-    users.push({ username, password });
-    localStorage.setItem("luxury_users", JSON.stringify(users));
-    alert("Đăng ký thành công! Hãy đăng nhập.");
-    toggleAuthMode(); return;
-  }
-  updateUserUI();
-  if (window.renderCart) window.renderCart();
-  if (window.updateNavBadge) window.updateNavBadge();
-  closeAuthModal();
-}
-
+// Cập nhật giao diện trên Navbar (Ẩn hiện nút Đăng nhập / Tên User)
 export function updateUserUI() {
   const greeting = document.getElementById("userGreeting");
   const loginBtn = document.querySelector(".login-btn");
@@ -58,9 +29,12 @@ export function updateUserUI() {
   }
 }
 
+// Xử lý đăng xuất: Xóa localStorage và cập nhật lại giao diện
 export function logout() { currentUser = null; localStorage.removeItem("luxury_user"); updateUserUI(); if (window.renderCart) window.renderCart(); if (window.updateNavBadge) window.updateNavBadge(); }
-export function openAuthModal() { const el = document.getElementById("authModal"); if(el) el.style.display = "flex"; }
-export function closeAuthModal() { const el = document.getElementById("authModal"); if(el) el.style.display = "none"; }
+
+// ============================================================
+// ===== QUẢN LÝ HỒ SƠ NGƯỜI DÙNG (PROFILE MODAL) =============
+// ============================================================
 export function openProfileModal() { 
   if(currentUser) {
     document.getElementById("profileUsername").innerText = currentUser.username; 
@@ -74,6 +48,7 @@ export function openProfileModal() {
 export function closeProfileModal() { document.getElementById("profileModal").style.display = "none"; }
 export function showProfile() { if (!currentUser) { window.showToast("Vui lòng đăng nhập để xem hồ sơ",'error'); return; } openProfileModal(); }
 
+// Upload Avatar mới lên server
 export async function saveProfile() {
   const fileInput = document.getElementById("avatarFileInput");
   if (!fileInput || !currentUser) return;
@@ -113,8 +88,10 @@ export async function saveProfile() {
 // ===== DEDICATED AUTH PAGE LOGIC (cho file auth.html) =======
 // ============================================================
 
+// Debug: Biến lưu trữ trạng thái của trang auth.html hiện tại
 export let authPageMode = 'login';
 
+// Logic chuyển đổi qua lại giữa form Đăng nhập & Đăng ký
 export function switchTab(m) {
   authPageMode = m;
   const isReg = m === 'register';
@@ -190,6 +167,7 @@ export function clearErrors() {
   ['errUsername','errPassword','errFullname','errEmail','errConfirm','errTerms'].forEach(clearErr);
 }
 
+// Kiểm tra Form Validation trước khi gửi request
 export function validate() {
   clearErrors();
   let ok = true;
@@ -221,6 +199,7 @@ export function validate() {
   return ok;
 }
 
+// Lắng nghe sự kiện Submit từ Auth Form, gửi qua FastAPI Backend
 export async function handleSubmit(event) {
   event.preventDefault();
   if (!validate()) return;
