@@ -4,3 +4,4 @@ motor
 python-dotenv
 email-validator
 google.generativeai
+python-multipart
