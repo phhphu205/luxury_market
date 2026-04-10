@@ -14,17 +14,22 @@ document.addEventListener('keydown', e => {
 
 document.querySelectorAll("img").forEach(img => img.setAttribute("loading", "lazy"));
 
-function init() {
+async function init() {
   // Yêu cầu đăng nhập khi truy cập trang products.html
   if (window.location.pathname.includes('products.html') && !Auth.currentUser) {
     window.location.href = 'auth.html';
     return;
   }
 
-  if (document.getElementById('categoriesGrid')) UI.renderCategories();
-  if (document.getElementById('productsGrid')) UI.renderProducts();
-  if (document.getElementById('flashGrid')) UI.renderFlashSale();
-  if (document.getElementById('reviewsGrid')) UI.renderReviews();
+  // Sử dụng Promise.all để tải các phần dữ liệu song song, cải thiện tốc độ tải trang
+  const renderPromises = [];
+  if (document.getElementById('categoriesGrid')) renderPromises.push(UI.renderCategories());
+  if (document.getElementById('productsGrid')) renderPromises.push(UI.renderProducts());
+  if (document.getElementById('flashGrid')) renderPromises.push(UI.renderFlashSale());
+  if (document.getElementById('reviewsGrid')) renderPromises.push(UI.renderReviews());
+
+  // Chờ tất cả các hàm render hoàn tất trước khi tiếp tục
+  await Promise.all(renderPromises);
 
   if (document.getElementById('bannerSlider')) {
     UI.startSlider();

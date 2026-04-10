@@ -1,4 +1,29 @@
-import { categories, products, flashSaleProducts, reviews } from './data.js';
+
+// ===== DATA MANAGEMENT =====
+// Data will be fetched from the API and cached here.
+let categories = [];
+let products = [];
+let flashSaleProducts = [];
+let reviews = [];
+
+const API_BASE_URL = "http://127.0.0.1:8000/api";
+
+// Helper to fetch data from the backend
+async function fetchData(endpoint) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/${endpoint}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error(`Could not fetch ${endpoint}:`, error);
+        showToast(`Lỗi tải dữ liệu: ${endpoint}`, 'error');
+        return []; // Return empty array on error to prevent crashes
+    }
+}
+
+// Function to get products, ensuring they are fetched.
+// This can be imported by other modules (like cart.js)
+export async function getProducts() { if (products.length === 0) { products = await fetchData('products'); } return products; }
 
 export let currentSlide = 0;
 export let isDark = localStorage.getItem('luxury_theme') === 'dark';
@@ -27,11 +52,17 @@ export function showToast(msg, type='success') {
   setTimeout(() => t.remove(), 4000);
 }
 
-export function renderCategories() {
+export async function renderCategories() {
   const grid = document.getElementById('categoriesGrid');
   if(!grid) return;
+  if (categories.length === 0) {
+    categories = await fetchData('categories');
+  }
+  const isIndexPage = !window.location.pathname.includes('/html/');
+  const productPagePath = isIndexPage ? 'html/products.html' : 'products.html';
+  if (!categories || categories.length === 0) { grid.innerHTML = '<p class="loading-error">Không thể tải danh mục...</p>'; return; }
   grid.innerHTML = categories.map(c => `
-    <a class="cat-card reveal" onclick="window.filterByCategory('${c.name}')" href="products.html">
+    <a class="cat-card reveal" onclick="window.filterByCategory('${c.name}')" href="${productPagePath}">
       <span class="cat-icon">${c.icon}</span>
       <div class="cat-name">${c.name}</div>
       <div class="cat-count">${c.count}</div>
@@ -39,7 +70,11 @@ export function renderCategories() {
   `).join('');
 }
 
-export function renderProducts(filter = 'Tất cả') {
+export async function renderProducts(filter = 'Tất cả') {
+  const grid = document.getElementById('productsGrid');
+  if(!grid) return;
+  grid.innerHTML = '<div class="loader"></div>'; // Loading state
+  await getProducts(); // Ensure products are fetched
   const filters = ['Tất cả', 'Thời trang', 'Điện tử', 'Giày dép', 'Đồng hồ'];
   const filterBar = document.getElementById('filterBar');
   if (filterBar) {
@@ -59,8 +94,7 @@ export function renderProducts(filter = 'Tất cả') {
     `;
   }
   let filtered = filter === 'Tất cả' ? products : products.filter(p => p.cat.includes(filter) || (filter==='Thời trang' && p.cat==='Thời trang'));
-  const grid = document.getElementById('productsGrid');
-  if(!grid) return;
+  if (!products || products.length === 0) { grid.innerHTML = '<p class="loading-error">Không thể tải sản phẩm...</p>'; return; }
   grid.innerHTML = filtered.map(p => {
     const discount = p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : 0;
     return `
@@ -86,9 +120,13 @@ export function renderProducts(filter = 'Tất cả') {
   setupObserver();
 }
 
-export function renderFlashSale() {
+export async function renderFlashSale() {
   const grid = document.getElementById('flashGrid');
   if(!grid) return;
+  if (flashSaleProducts.length === 0) {
+    flashSaleProducts = await fetchData('flash-sales');
+  }
+  if (!flashSaleProducts || flashSaleProducts.length === 0) { grid.innerHTML = '<p class="loading-error">Không thể tải flash sale...</p>'; return; }
   grid.innerHTML = flashSaleProducts.map(p => `
     <div class="flash-card reveal" onclick="window.showToast('Thêm ${p.name} vào giỏ hàng!','success')">
       <div class="flash-img">${p.icon}<div class="flash-progress"><div class="flash-progress-bar" style="width:${p.progress}%"></div></div></div>
@@ -101,9 +139,13 @@ export function renderFlashSale() {
   `).join('');
 }
 
-export function renderReviews() {
+export async function renderReviews() {
   const grid = document.getElementById('reviewsGrid');
   if(!grid) return;
+  if (reviews.length === 0) {
+    reviews = await fetchData('reviews');
+  }
+  if (!reviews || reviews.length === 0) { grid.innerHTML = '<p class="loading-error">Không thể tải đánh giá...</p>'; return; }
   grid.innerHTML = reviews.map(r => `
     <div class="review-card reveal">
       <div class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
@@ -113,11 +155,12 @@ export function renderReviews() {
   `).join('');
 }
 
-export function openProduct(id) {
+export async function openProduct(id) {
   if (!window.currentUser) {
     window.location.href = window.location.pathname.includes('/html/') ? 'auth.html' : 'html/auth.html';
     return;
   }
+  await getProducts(); // Ensure products are loaded
   const p = products.find(x => x.id===id);
   if(!p) return;
   const discount = p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : 0;

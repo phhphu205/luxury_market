@@ -1,4 +1,4 @@
-import { products } from './data.js';
+import { getProducts } from './ui.js';
 
 export let cart = [];
 
@@ -9,12 +9,17 @@ export function getCart() {
     return cart;
 }
 
-export function addToCart(id) {
+export async function addToCart(id) {
   if (!window.currentUser) {
     window.location.href = window.location.pathname.includes('/html/') ? 'auth.html' : 'html/auth.html';
     return;
   }
-  const product = products.find(p => p.id === id);
+  const allProducts = await getProducts();
+  const product = allProducts.find(p => p.id === id);
+  if (!product) {
+    window.showToast("❌ Không tìm thấy sản phẩm!", "error");
+    return;
+  }
   const existingItem = getCart().find(item => item.id === id);
   if (existingItem) existingItem.qty++;
   else cart.push({...product, qty: 1});
